@@ -5,34 +5,9 @@ export default function Home() {
     {
       id: "1",
       name: "Wireless Noise-Cancelling Headphones",
-      price: 199.99,
-      originalPrice: 299.99,
-      image: "/modern-wireless-headphones.jpg",
+      price: 3.15,
       badge: "Sale",
-      category: "Audio",
-    },
-    {
-      id: "2",
-      name: "Smart Fitness Watch Pro",
-      price: 349.99,
-      image: "/premium-smartwatch-fitness-tracker.jpg",
-      badge: "New",
-      category: "Wearables",
-    },
-    {
-      id: "3",
-      name: "Mechanical Gaming Keyboard RGB",
-      price: 129.99,
-      originalPrice: 179.99,
-      image: "/rgb-mechanical-gaming-keyboard.png",
-      category: "Gaming",
-    },
-    {
-      id: "4",
-      name: "Ultra HD 4K Webcam",
-      price: 89.99,
-      image: "/professional-4k-webcam.jpg",
-      category: "Accessories",
+      productId: "prod-001",
     },
   ];
 
@@ -42,10 +17,10 @@ export default function Home() {
         {/* Header */}
         <div className="mb-12 text-center">
           <h1 className="text-balance text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
-            Featured Products
+            Productos destacados
           </h1>
           <p className="mt-4 text-pretty text-lg text-muted-foreground">
-            Discover our curated selection of premium tech products
+            Descubre nuestra selección curada de productos tecnológicos premium
           </p>
         </div>
 

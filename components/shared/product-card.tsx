@@ -1,29 +1,36 @@
+"use client";
+import { createOrder } from "@/actions";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { ShoppingCart, Heart } from "lucide-react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 interface ProductCardProps {
-  id: string;
+  productId: string;
   name: string;
   price: number;
-  originalPrice?: number;
-  image: string;
   badge?: string;
-  category?: string;
 }
 
 export function ProductCard({
+  productId,
   name,
   price,
-  originalPrice,
-  image,
   badge,
-  category,
 }: ProductCardProps) {
-  const discount = originalPrice
-    ? Math.round(((originalPrice - price) / originalPrice) * 100)
-    : 0;
+  const router = useRouter();
+  const createOrderApi = async (productId: string) => {
+    // En produccion se debe enviar el id de producto y el backend debe crear la orden con el producto
+    try {
+      const res = await createOrder(productId);
+      if (res?.statusCode === 201) {
+        router.push(`/payphone?id=${res.order.id}`);
+      }
+    } catch (error) {
+      console.error("Error creating order:", error);
+    }
+  };
 
   return (
     <Card className="group relative overflow-hidden border-border bg-card transition-all hover:shadow-lg hover:shadow-primary/5 py-0">
@@ -43,7 +50,7 @@ export function ProductCard({
       </button>
 
       {/* Image Container */}
-      <div className="relative aspect-square overflow-hidden bg-muted">
+      <div className="relative aspect-square overflow-hidden bg-muted mb-0">
         <Image
           src={"https://placehold.co/600x600.png"}
           alt={name}
@@ -53,16 +60,9 @@ export function ProductCard({
       </div>
 
       {/* Content */}
-      <div className="flex flex-col gap-3 p-4">
-        {/* Category */}
-        {category && (
-          <span className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
-            {category}
-          </span>
-        )}
-
+      <div className="flex flex-col gap-3 px-4 pb-4 -mt-2">
         {/* Product Name */}
-        <h3 className="text-balance font-semibold leading-tight text-card-foreground line-clamp-2">
+        <h3 className=" text-balance font-semibold leading-tight text-card-foreground line-clamp-2">
           {name}
         </h3>
 
@@ -71,25 +71,16 @@ export function ProductCard({
           <span className="text-2xl font-bold text-card-foreground">
             ${price.toFixed(2)}
           </span>
-          {originalPrice && (
-            <>
-              <span className="text-sm text-muted-foreground line-through">
-                ${originalPrice.toFixed(2)}
-              </span>
-              <span className="text-xs font-semibold text-accent">
-                -{discount}%
-              </span>
-            </>
-          )}
         </div>
 
         {/* Add to Cart Button */}
         <Button
+          onClick={() => createOrderApi(productId)}
           className="w-full gap-2 bg-primary text-primary-foreground hover:bg-primary/90"
           size="lg"
         >
           <ShoppingCart className="h-4 w-4" />
-          Add to Cart
+          Compra Ahora
         </Button>
       </div>
     </Card>
