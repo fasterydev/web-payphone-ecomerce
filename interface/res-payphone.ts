@@ -1,0 +1,31 @@
+export interface ResPayphone {
+    email:                string;
+    cardType:             string;
+    bin:                  string;
+    lastDigits:           string;
+    deferredCode:         string;
+    deferred:             boolean;
+    cardBrandCode:        string;
+    cardBrand:            string;
+    amount:               number;
+    clientTransactionId:  string;
+    phoneNumber:          string;
+    statusCode:           number;
+    transactionStatus:    string;
+    message:              string;
+    messageCode:          number;
+    transactionId:        number;
+    document:             string;
+    taxes:                any[];
+    currency:             string;
+    optionalParameter1:   string;
+    optionalParameter2:   string;
+    optionalParameter3:   string;
+    optionalParameter4:   string;
+    storeName:            string;
+    date:                 Date;
+    regionIso:            string;
+    transactionType:      string;
+    reference:            string;
+    canBypassRedirection: boolean;
+}
